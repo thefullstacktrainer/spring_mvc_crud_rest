@@ -8,6 +8,6 @@
 </head>
 <body>
 	<p>Welcome to Spring World</p>
-	<a href="games">Games</a>
+	<a href="games">All Games</a>
 </body>
 </html>

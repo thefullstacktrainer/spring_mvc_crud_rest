@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h2>All Games</h2>
+	<a href="addgame">Add Game</a>
 	<a href="game">Volarant</a>
 </body>
 </html>
