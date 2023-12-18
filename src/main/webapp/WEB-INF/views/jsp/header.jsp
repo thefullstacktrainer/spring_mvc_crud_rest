@@ -1,5 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- Navigation links -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/styles.css">
+
+
 <nav>
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/">Home</a></li>

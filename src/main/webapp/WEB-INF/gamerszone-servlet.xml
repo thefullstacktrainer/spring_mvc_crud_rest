@@ -23,4 +23,7 @@
 		<property name="prefix" value="/WEB-INF/views/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<!-- Configuration for handling static resources -->
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
 </beans>
