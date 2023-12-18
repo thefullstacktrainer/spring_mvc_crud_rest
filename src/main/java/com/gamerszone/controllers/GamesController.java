@@ -5,14 +5,26 @@ package com.gamerszone.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
+import com.gamerszone.models.Game;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class GamesController {
+
+    private static List<Game> games = new ArrayList<>();
+
+    static {
+        // Initialize with some sample games
+        games.add(new Game(1L, "Game A"));
+        games.add(new Game(2L, "Game B"));
+        games.add(new Game(3L, "Game C"));
+    }
 
     @GetMapping("/addGame")
     public String showAddGameForm() {
@@ -20,16 +32,7 @@ public class GamesController {
     }
 
     @GetMapping("/games")
-    public String showAllGames(@RequestParam(required = false) String category, Model model) {
-        // Logic to fetch games based on category (if provided)
-        // For simplicity, let's create a sample list of games
-        List<String> games;
-        if ("action".equalsIgnoreCase(category)) {
-            games = Arrays.asList("Game A (Action)", "Game B (Action)", "Game C (Action)");
-        } else {
-            games = Arrays.asList("Game A", "Game B", "Game C");
-        }
-
+    public String showAllGames(Model model) {
         // Add the list of games to the model
         model.addAttribute("games", games);
 
@@ -40,10 +43,34 @@ public class GamesController {
     @PostMapping("/saveGame")
     public String saveGame(@RequestParam String gameName) {
         // Logic to save the game to the database or service
-        // For simplicity, let's print the game name for now
-        System.out.println("Saving Game: " + gameName);
+        // For simplicity, let's create a new game with an auto-incremented ID
+        long newId = games.size() + 1;
+        Game newGame = new Game(newId, gameName);
+        games.add(newGame);
 
         // Redirect to the /games endpoint to show the updated list of games
         return "redirect:/games";
+    }
+
+    @GetMapping("/games/{id}")
+    public String showGameDetails(@PathVariable Long id, Model model) {
+        // Logic to fetch details of the game with the given ID
+        Game selectedGame = findGameById(id);
+        if (selectedGame != null) {
+            // Add the selected game to the model
+            model.addAttribute("game", selectedGame);
+            return "gameDetails";
+        } else {
+            // Redirect to the /games endpoint if the game is not found
+            return "redirect:/games";
+        }
+    }
+
+    // Helper method to find a game by ID
+    private Game findGameById(Long id) {
+        return games.stream()
+                .filter(game -> game.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }

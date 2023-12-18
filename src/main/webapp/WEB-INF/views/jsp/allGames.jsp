@@ -1,23 +1,23 @@
-<!-- src/main/webapp/WEB-INF/views/jsp/gamerszone.jsp -->
+<!-- src/main/webapp/WEB-INF/views/jsp/allGames.jsp -->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
 <html>
 <head>
-	<title>Gamers Zone</title>
+<title>All Games</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<h1>All Games</h1>
 
-	<h2>All Games</h2>
-
-	<ul>
-		<c:forEach var="game" items="${games}">
-			<li>${game}</li>
-		</c:forEach>
-	</ul>
+	<!-- Display all games with links to their details -->
+	<c:forEach var="game" items="${games}">
+		<p>
+			<a href="<%=request.getContextPath()%>/games/${game.id}">
+				${game.name} </a>
+		</p>
+	</c:forEach>
 
 	<%@ include file="footer.jsp"%>
 </body>
