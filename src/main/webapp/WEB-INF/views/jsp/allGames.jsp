@@ -6,14 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gamers Zone</title>
+	<title>Gamers Zone</title>
 </head>
 <body>
-    <%@ include file="header.jsp" %>
+	<%@ include file="header.jsp"%>
 
-    <!-- Content specific to gamerszone.jsp -->
-    <h1>Welcome to Gamers Zone!</h1>
+	<h2>All Games</h2>
 
-    <%@ include file="footer.jsp" %>
+	<ul>
+		<c:forEach var="game" items="${games}">
+			<li>${game}</li>
+		</c:forEach>
+	</ul>
+
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
