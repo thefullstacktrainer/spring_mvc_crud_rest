@@ -8,6 +8,6 @@ public class HelloController {
 	
 	@RequestMapping("/")
 	public String display() {
-		return "index";
+		return "mainpage";
 	}
 }
