@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/styles.css">
-
+	href="<c:url value='/resources/css/styles.css' />">
 
 <nav>
 	<ul>

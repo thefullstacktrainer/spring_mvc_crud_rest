@@ -1,35 +1,80 @@
 package com.gamerszone.models;
 
+import java.util.List;
+
 public class Game {
-	private Long id;
-	private String name;
+    private Long id;
+    private String name;
+    private String genre;
+    private List<String> platforms;
+    private boolean multiplayer;
 
-	public Game() {
-	}
+    // Constructors
 
-	public Game(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public Game() {
+        // Default constructor
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Game(Long id, String name, String genre, List<String> platforms, boolean multiplayer) {
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.platforms = platforms;
+        this.multiplayer = multiplayer;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // Getters and Setters
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Override
-	public String toString() {
-		return "Game{" + "id=" + id + ", name='" + name + '\'' + '}';
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public List<String> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<String> platforms) {
+        this.platforms = platforms;
+    }
+
+    public boolean isMultiplayer() {
+        return multiplayer;
+    }
+
+    public void setMultiplayer(boolean multiplayer) {
+        this.multiplayer = multiplayer;
+    }
+
+    // toString method
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", genre='" + genre + '\'' +
+                ", platforms=" + platforms +
+                ", multiplayer=" + multiplayer +
+                '}';
+    }
 }

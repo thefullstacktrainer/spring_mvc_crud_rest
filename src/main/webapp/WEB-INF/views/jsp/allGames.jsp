@@ -5,7 +5,11 @@
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/styles.css' />">
+
 <title>All Games</title>
+
 </head>
 <body>
 	<%@ include file="header.jsp"%>
