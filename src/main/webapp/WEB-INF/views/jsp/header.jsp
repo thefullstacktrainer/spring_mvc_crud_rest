@@ -10,7 +10,7 @@
 		<li><a href="${pageContext.request.contextPath}/">Home</a></li>
 		<li><a href="${pageContext.request.contextPath}/games">All
 				Games</a></li>
-		<li><a href="${pageContext.request.contextPath}/addGame">Add
+		<li><a href="${pageContext.request.contextPath}/games/addGame">Add
 				a New Game</a></li>
 	</ul>
 </nav>

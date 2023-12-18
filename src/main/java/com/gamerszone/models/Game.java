@@ -1,5 +1,3 @@
-// src/main/java/com/gamerszone/models/Game.java
-
 package com.gamerszone.models;
 
 public class Game {
@@ -15,8 +13,16 @@ public class Game {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

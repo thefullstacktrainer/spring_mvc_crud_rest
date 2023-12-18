@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gamerszone.models.Game;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/games") // Add @RequestMapping("/games") at the class level
 public class GamesController {
 
     private static List<Game> games = new ArrayList<>();
@@ -31,7 +33,7 @@ public class GamesController {
         return "addGameForm";
     }
 
-    @GetMapping("/games")
+    @GetMapping
     public String showAllGames(Model model) {
         // Add the list of games to the model
         model.addAttribute("games", games);
@@ -52,7 +54,7 @@ public class GamesController {
         return "redirect:/games";
     }
 
-    @GetMapping("/games/{id}")
+    @GetMapping("/{id}")
     public String showGameDetails(@PathVariable Long id, Model model) {
         // Logic to fetch details of the game with the given ID
         Game selectedGame = findGameById(id);
