@@ -27,3 +27,4 @@ replay_pid*
 .classpath
 .project
 .settings/*
+target/*
