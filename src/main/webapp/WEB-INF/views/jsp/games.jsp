@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Welcome to Spring World</p>
-	<a href="games">Games</a>
+	<h2>All Games</h2>
+	<a href="game">Volarant</a>
 </body>
 </html>

@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Game</title>
 </head>
 <body>
-	<p>Welcome to Spring World</p>
-	<a href="games">Games</a>
+	<h1>Volarant</h1>
 </body>
 </html>
