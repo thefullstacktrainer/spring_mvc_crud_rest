@@ -1,4 +1,4 @@
-// src/main/java/com/gamerszone/controllers/GameController.java
+// src/main/java/com/gamerszone/controllers/GamesController.java
 
 package com.gamerszone.controllers;
 
@@ -20,10 +20,15 @@ public class GamesController {
     }
 
     @GetMapping("/games")
-    public String showAllGames(Model model) {
-        // Logic to fetch all games from the database or service
+    public String showAllGames(@RequestParam(required = false) String category, Model model) {
+        // Logic to fetch games based on category (if provided)
         // For simplicity, let's create a sample list of games
-        List<String> games = Arrays.asList("Game A", "Game B", "Game C");
+        List<String> games;
+        if ("action".equalsIgnoreCase(category)) {
+            games = Arrays.asList("Game A (Action)", "Game B (Action)", "Game C (Action)");
+        } else {
+            games = Arrays.asList("Game A", "Game B", "Game C");
+        }
 
         // Add the list of games to the model
         model.addAttribute("games", games);
