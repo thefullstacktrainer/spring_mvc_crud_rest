@@ -15,4 +15,12 @@ public class GamersController {
 	public String displayGame() {
 		return "game";
 	}
+	
+
+	@RequestMapping("/gamedashboard")
+	public String showDashboard() {
+		return "gamedashboard";
+	}
+	
+	
 }
