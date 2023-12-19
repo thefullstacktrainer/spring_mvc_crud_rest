@@ -27,11 +27,13 @@
 	<mvc:resources mapping="/resources/**"
 		location="/resources/" />
 
+	<!-- Define the dataSource and jdbcTemplate beans -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/spring_tutorials" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/spring_tutorials" />
 		<property name="username" value="admin" />
 		<property name="password" value="password" />
 	</bean>
@@ -41,7 +43,12 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<!-- Define the objectMapper bean -->
+	<bean id="objectMapper"
+		class="com.fasterxml.jackson.databind.ObjectMapper" />
+
 	<bean id="gameDao" class="com.gamerszone.dao.GameDao">
-		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<constructor-arg ref="jdbcTemplate" />
+		<constructor-arg ref="objectMapper" />
 	</bean>
 </beans>

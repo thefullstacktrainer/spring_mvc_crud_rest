@@ -36,22 +36,24 @@ public class GamesController {
 
 	@GetMapping
 	public String showAllGames(Model model) {
-//		List<Game> games = gameDao.getAllGames();
+		List<Game> games = gameDao.getAllGames();
 		model.addAttribute("games", games);
 		return "allGames";
 	}
 
 	@PostMapping("/saveGame")
 	public String saveGame(@ModelAttribute("newGame") Game newGame) {
-		long newId = games.size() + 1;
-		newGame.setId(newId);
-		games.add(newGame);
+//		long newId = games.size() + 1;
+//		newGame.setId(newId);
+//		games.add(newGame);
+		gameDao.save(newGame);
 		return "redirect:/games";
 	}
 
 	@GetMapping("/{id}")
 	public String showGameDetails(@PathVariable Long id, Model model) {
-		Game selectedGame = findGameById(id);
+//		Game selectedGame = findGameById(id);
+		Game selectedGame = gameDao.getGameById(id);
 		if (selectedGame != null) {
 			model.addAttribute("game", selectedGame);
 			return "gameDetails";
