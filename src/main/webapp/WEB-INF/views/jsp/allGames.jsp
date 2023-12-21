@@ -17,10 +17,19 @@
 
 	<!-- Display all games with links to their details -->
 	<c:forEach var="game" items="${games}">
-		<p>
+		<div>
+
 			<a href="<%=request.getContextPath()%>/games/${game.id}">
-				${game.name} </a>
-		</p>
+				${game.name} </a> <a
+				href="<%=request.getContextPath()%>/games/edit/${game.id}"> Edit
+			</a>
+			<form action="<%=request.getContextPath()%>/games/delete/${game.id}"
+				method="post" style="display: inline;">
+				<input type="hidden" name="_method" value="delete">
+				<button type="submit">Delete</button>
+			</form>
+
+		</div>
 	</c:forEach>
 
 	<%@ include file="footer.jsp"%>

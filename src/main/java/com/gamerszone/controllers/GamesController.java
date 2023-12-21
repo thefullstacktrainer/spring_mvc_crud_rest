@@ -62,7 +62,26 @@ public class GamesController {
 		}
 	}
 
-	private Game findGameById(Long id) {
-		return games.stream().filter(game -> game.getId().equals(id)).findFirst().orElse(null);
+	@GetMapping("/edit/{id}")
+	public String editGame(@PathVariable Long id, Model model) {
+		Game game = gameDao.getGameById(id);
+		model.addAttribute("editedGame", game);
+		return "editGame";
 	}
+
+	@PostMapping("/updateGame")
+	public String updateGame(@ModelAttribute("editedGame") Game editedGame) {
+		gameDao.update(editedGame);
+		return "redirect:/games/view";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteGame(@PathVariable Long id) {
+		gameDao.delete(id);
+		return "redirect:/viewGames";
+	}
+
+//	private Game findGameById(Long id) {
+//		return games.stream().filter(game -> game.getId().equals(id)).findFirst().orElse(null);
+//	}
 }

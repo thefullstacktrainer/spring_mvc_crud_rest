@@ -35,13 +35,25 @@ public class GameDao {
 		}
 	}
 
-//    public int update(Game game) {
-//        // Implement the update logic here
-//    }
-//
-//    public int delete(Long id) {
-//        // Implement the delete logic here
-//    }
+	public int update(Game game) {
+		String sql = "UPDATE games SET name=?, genre=?, platforms=?, multiplayer=? WHERE id=?";
+		return jdbcTemplate.update(sql, game.getName(), game.getGenre(), serializePlatforms(game.getPlatforms()),
+				game.isMultiplayer(), game.getId());
+	}
+
+	public int delete(Long id) {
+		String sql = "DELETE FROM games WHERE id=?";
+		return jdbcTemplate.update(sql, id);
+	}
+
+	// Helper method to serialize the list of platforms to a JSON string
+	private String serializePlatforms(List<String> platforms) {
+		try {
+			return objectMapper.writeValueAsString(platforms);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException("Error serializing platforms to JSON", e);
+		}
+	}
 
 	public Game getGameById(Long id) {
 		String sql = "SELECT * FROM games WHERE id = ?";
