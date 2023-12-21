@@ -43,16 +43,16 @@ public class GamesController {
 
 	@PostMapping("/saveGame")
 	public String saveGame(@ModelAttribute("newGame") Game newGame) {
-//		long newId = games.size() + 1;
-//		newGame.setId(newId);
-//		games.add(newGame);
+		// long newId = games.size() + 1;
+		// newGame.setId(newId);
+		// games.add(newGame);
 		gameDao.save(newGame);
 		return "redirect:/games";
 	}
 
 	@GetMapping("/{id}")
 	public String showGameDetails(@PathVariable Long id, Model model) {
-//		Game selectedGame = findGameById(id);
+		// Game selectedGame = findGameById(id);
 		Game selectedGame = gameDao.getGameById(id);
 		if (selectedGame != null) {
 			model.addAttribute("game", selectedGame);
@@ -72,16 +72,17 @@ public class GamesController {
 	@PostMapping("/updateGame")
 	public String updateGame(@ModelAttribute("editedGame") Game editedGame) {
 		gameDao.update(editedGame);
-		return "redirect:/games/view";
+		return "redirect:/games/allGames";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		gameDao.delete(id);
-		return "redirect:/viewGames";
+		return "redirect:/games/allGames";
 	}
 
-//	private Game findGameById(Long id) {
-//		return games.stream().filter(game -> game.getId().equals(id)).findFirst().orElse(null);
-//	}
+	// private Game findGameById(Long id) {
+	// return games.stream().filter(game ->
+	// game.getId().equals(id)).findFirst().orElse(null);
+	// }
 }
