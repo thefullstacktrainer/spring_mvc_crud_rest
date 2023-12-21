@@ -4,6 +4,7 @@ import com.gamerszone.models.Game;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.ResultSet;
@@ -37,8 +38,16 @@ public class GameDao {
 
 	public int update(Game game) {
 		String sql = "UPDATE games SET name=?, genre=?, platforms=?, multiplayer=? WHERE id=?";
-		return jdbcTemplate.update(sql, game.getName(), game.getGenre(), serializePlatforms(game.getPlatforms()),
-				game.isMultiplayer(), game.getId());
+		try {
+			String platformsJson = objectMapper.writeValueAsString(game.getPlatforms());
+			return jdbcTemplate.update(sql, game.getName(), game.getGenre(), platformsJson, game.isMultiplayer(),
+					game.getId());
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Error converting platforms to JSON", e);
+		}
+
 	}
 
 	public int delete(Long id) {
@@ -66,7 +75,16 @@ public class GameDao {
 
 			// Platforms is stored as a comma-separated string in the database
 			String platformsString = rs.getString("platforms");
-			List<String> platforms = Arrays.asList(platformsString.split(","));
+			List<String> platforms = null;
+			try {
+				platforms = objectMapper.readValue(platformsString, List.class);
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			game.setPlatforms(platforms);
 
 			return game;
@@ -87,7 +105,16 @@ public class GameDao {
 
 				// Platforms is stored as a comma-separated string in the database
 				String platformsString = rs.getString("platforms");
-				List<String> platforms = Arrays.asList(platformsString.split(","));
+				List<String> platforms = null;
+				try {
+					platforms = objectMapper.readValue(platformsString, List.class);
+				} catch (JsonMappingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				game.setPlatforms(platforms);
 
 				return game;

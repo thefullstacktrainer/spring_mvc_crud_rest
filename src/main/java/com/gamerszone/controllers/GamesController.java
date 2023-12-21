@@ -28,6 +28,13 @@ public class GamesController {
 		games.add(new Game(3L, "Game C", "Strategy", Arrays.asList("PC"), true));
 	}
 
+	@ModelAttribute("allPlatforms")
+	public List<String> getAllPlatforms() {
+		// Retrieve the list of all available platforms from your data source
+		// For example, you can hardcode it or retrieve it from a database
+		return Arrays.asList("PC", "XBOX", "PLAYSTATION");
+	}
+
 	@GetMapping("/addGame")
 	public String showAddGameForm(Model model) {
 		model.addAttribute("newGame", new Game());
@@ -66,19 +73,20 @@ public class GamesController {
 	public String editGame(@PathVariable Long id, Model model) {
 		Game game = gameDao.getGameById(id);
 		model.addAttribute("editedGame", game);
+		System.out.println(game);
 		return "editGame";
 	}
 
 	@PostMapping("/updateGame")
 	public String updateGame(@ModelAttribute("editedGame") Game editedGame) {
 		gameDao.update(editedGame);
-		return "redirect:/games/allGames";
+		return "redirect:/games";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		gameDao.delete(id);
-		return "redirect:/games/allGames";
+		return "redirect:/games";
 	}
 
 	// private Game findGameById(Long id) {
